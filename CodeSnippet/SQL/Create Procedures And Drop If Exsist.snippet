@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+<_locDefinition xmlns="urn:locstudio">
+    <_locDefault _loc="locNone" />
+    <_locTag _loc="locData">Title</_locTag>
+    <_locTag _loc="locData">Description</_locTag>
+    <_locTag _loc="locData">Author</_locTag>
+    <_locTag _loc="locData">ToolTip</_locTag>
+</_locDefinition>
+	<CodeSnippet Format="1.0.0">
+	<Header>
+	<Title>CREATE OR ALTER Procedure (SQL 2016 and newer)</Title>
+        <Shortcut></Shortcut>
+	<Description>CREATE OR ALTER Procedure (SQL 2016 and newer)</Description>
+	<Author>Vinh Le</Author>
+	<SnippetTypes>
+		<SnippetType>Expansion</SnippetType>
+	</SnippetTypes>
+	</Header>
+	<Snippet>
+		<Declarations>
+			<Literal>
+				<ID>Author</ID>
+				<ToolTip>Name of author</ToolTip>
+				<Default>Vinh Le</Default>
+			</Literal>
+			<Literal>
+				<ID>CreatedAt</ID>
+				<ToolTip></ToolTip>
+				<Default></Default>
+			</Literal>
+			<Literal>
+				<ID>SchemaName</ID>
+				<ToolTip>Name of the schema</ToolTip>
+				<Default>dbo</Default>
+			</Literal>
+			<Literal>
+				<ID>storedprocname</ID>
+				<ToolTip>Name of the stored procedure</ToolTip>
+				<Default>Sample_Procedure</Default>
+			</Literal>
+			<Literal>
+				<ID>storedprocdesc</ID>
+				<ToolTip>description of the stored procedure</ToolTip>
+				<Default>Sample_Procedure</Default>
+			</Literal>
+			<Literal>
+				<ID>date</ID>
+				<ToolTip>Created date</ToolTip>
+				<Default>yyyy-MM-dd</Default>
+			</Literal>
+		</Declarations>
+		<Code Language="SQL">
+			<![CDATA[
+-- =============================================
+-- Author: $Author$
+-- Name:  $storedprocname$
+-- Description:	 $storedprocdesc$
+-- Usage: 
+-- Notes:	
+-- History:
+-- Date				Author			Description
+-- $date$			$Author$		Intial
+-- =============================================
+
+
+/* IF EXISTS(SELECT name FROM SYSOBJECTS WHERE name = '$storedprocname$' and type = 'P')
+DROP PROCEDURE  [$SchemaName$].[$storedprocname$]
+GO */
+
+-- CREATE OR ALTER statement only support SQL Server 2016 SP1 and newer
+CREATE OR ALTER PROCEDURE [$SchemaName$].[$storedprocname$] 
+			
+AS
+BEGIN
+	SELECT 1
+
+END
+GO
+
+$end$]]>
+
+
+		</Code>
+	</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

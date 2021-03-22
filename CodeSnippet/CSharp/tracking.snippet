@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Add Tracking section</Title>
+            <Shortcut>tracking</Shortcut>
+            <Description></Description>
+            <Author>Vinh Le</Author>
+            <SnippetTypes>
+                <SnippetType>Expansion</SnippetType>
+            </SnippetTypes>
+        </Header>
+        <Snippet>
+           
+            <Code Language="csharp">
+                <![CDATA[
+        public bool IsInactive { get; set; }
+
+        public string CreatedBy { get; set; }
+
+        public DateTime? CreatedAt { get; set; }
+
+        public string UpdatedBy { get; set; }
+
+        public DateTime? UpdatedAt { get; set; }
+$end$]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<_locDefinition xmlns="urn:locstudio">
+		<_locDefault _loc="locNone" />
+		<_locTag _loc="locData">Title</_locTag>
+		<_locTag _loc="locData">Description</_locTag>
+		<_locTag _loc="locData">Author</_locTag>
+		<_locTag _loc="locData">ToolTip</_locTag>
+	</_locDefinition>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Create Cursor</Title>
+			<Shortcut></Shortcut>
+			<Description>Create Cursor</Description>
+			<Author>Vinh Le</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Declarations>
+				<Literal>
+					<ID>CursorName</ID>
+					<ToolTip>Name of cursor</ToolTip>
+					<Default>My_Cursor</Default>
+				</Literal>
+				<Literal>
+					<ID>Statement</ID>
+					<ToolTip>Statement</ToolTip>
+					<Default>SELECT Id FROM</Default>
+				</Literal>
+				<Literal>
+					<ID>Param1</ID>
+					<ToolTip>Name of the input parameter</ToolTip>
+					<Default>param1</Default>
+				</Literal>
+				<Literal>
+					<ID>Datatype_Param1</ID>
+					<ToolTip>Data type of the input parameter</ToolTip>
+					<Default>int</Default>
+				</Literal>
+				<Literal>
+					<ID>Param2</ID>
+					<ToolTip>Name of the input parameter</ToolTip>
+					<Default>param2</Default>
+				</Literal>
+				<Literal>
+					<ID>Datatype_Param2</ID>
+					<ToolTip>Data type of the input parameter</ToolTip>
+					<Default>char(5)</Default>
+				</Literal>
+			</Declarations>
+			<Code Language="SQL">
+				<![CDATA[
+
+DECLARE $Param1$ $Datatype_Param1$, $Param2$ $Datatype_Param2$;
+DECLARE $CursorName$ CURSOR
+
+LOCAL FORWARD_ONLY FOR
+
+	$Statement$
+
+OPEN $CursorName$
+FETCH NEXT FROM $CursorName$ INTO $Param1$, $Param2$
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+
+	$end$
+
+FETCH NEXT FROM $CursorName$ INTO $Param1$, $Param2$
+END
+
+CLOSE $CursorName$
+DEALLOCATE $CursorName$
+]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

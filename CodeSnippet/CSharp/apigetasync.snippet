@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>API Get Async</Title>
+            <Shortcut>apigetasync</Shortcut>
+            <Description></Description>
+            <Author>Vinh Le</Author>
+            <SnippetTypes>
+                <SnippetType>Expansion</SnippetType>
+            </SnippetTypes>
+        </Header>
+        <Snippet>
+            <Declarations>
+                <Literal>
+                    <ID>route</ID>
+                    <ToolTip>Route</ToolTip>
+                    <Default></Default>
+                </Literal>
+                <Literal>
+                    <ID>name</ID>
+                    <ToolTip>Name</ToolTip>
+                    <Default>Get</Default>
+                </Literal>   
+                 <Literal>
+                    <ID>description</ID>
+                    <ToolTip>description</ToolTip>
+                    <Default></Default>
+                </Literal>  
+                <Literal>
+                    <ID>param</ID>
+                    <ToolTip>param</ToolTip>
+                    <Default></Default>
+                </Literal>               
+            </Declarations>
+            <Code Language="csharp">
+                <![CDATA[
+/// <summary>
+///     $description$
+/// </summary>
+/// <returns></returns>
+[HttpGet($route$)]
+public async Task<IActionResult> $name$($param$)
+{
+    return Ok();
+}
+
+$end$]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>
