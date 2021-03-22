@@ -1,44 +1,16 @@
 
-use master
-go
 
-DECLARE @databaseName varchar(255) = 'M1CX_Tenant'
-DECLARE @newDatabaseName varchar(255) = 'M1CX_Tenant_CityMazda'
-DECLARE @dumpDevice varchar(255) = @databaseName + '_dump_' + CONVERT(VARCHAR(20),GETDATE(),112) 
-
-DECLARE @path varchar(max)
-DECLARE @dumpPath varchar(max) 
-IF @path is null 
-	BEGIN
-		-- Default path
-		SET @path = 'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\';
-	END
-
-SET @dumpPath = @path + @dumpDevice +'.bak';
-
-if exists (select top 1 1 from sys.backup_devices where name = @dumpDevice)
-	EXEC sp_dropdevice @dumpDevice
-
--- create new backup device
-EXEC sp_addumpdevice 'disk', @dumpDevice, @dumpPath;
-
--- backup database to backup device
-BACKUP DATABASE @databaseName
-    TO @dumpDevice ;
-
--- list file in backup device
-RESTORE FILELISTONLY
-    FROM @dumpDevice ;
-
-DECLARE @newDatabasePath varchar(255) = @path + @newDatabaseName+'.mdf';
-DECLARE @newDatabaseLogPath varchar(255) = @path + @newDatabaseName + '.ldf'
-DECLARE @newDatabaseLogName varchar(255) = concat(@databaseName,'_log');
-RESTORE DATABASE @newDatabaseName
-    FROM @dumpDevice
-    WITH MOVE @databaseName TO @newDatabasePath,
-    MOVE @newDatabaseLogName TO @newDatabaseLogPath;
+DECLARE @vSQL nvarchar(MAX) = ''
 
 
-EXEC sp_dropdevice @dumpDevice
+select @vSQL += CHAR(13)+CHAR(10) + FORMATMESSAGE('exec [FullCopyDatabaseAndLog] @databaseName = ''M1CX_Tenant'', @newDatabaseName = ''%s'' ', t.DatabaseName) 
+from [M1CX_Master].[dbo].[Tenant] t
+	 left join  sys.databases db on db.name = t.DatabaseName
+where 
+	t.DatabaseName like 'M1CX_Tenant%' 
+	and db.name is null
+	and t.IsLive = 1
 
 
+select @vSQL
+exec sp_executesql @vSQL
